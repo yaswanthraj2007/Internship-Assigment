@@ -1,4 +1,4 @@
-==================================== Character Recognition Neural Network — From Scratch (NumPy) ==========================================
+                        Character Recognition Neural Network — From Scratch (NumPy) 
 
 A feedforward neural network implemented entirely from scratch using NumPy (no TensorFlow/PyTorch/Keras) to classify 35 character classes: uppercase letters A–Z and digits 1–9.
 
