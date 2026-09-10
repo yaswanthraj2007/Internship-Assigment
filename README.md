@@ -11,7 +11,7 @@ A feedforward neural network implemented entirely from scratch using NumPy (no T
 
 ==> Repository Structure
 
-
+```
 character-recognition-nn/
 ├── Assigment.ipynb          # Full notebook: data generation, network, training, analysis
 ├── data/
@@ -24,26 +24,26 @@ character-recognition-nn/
 │   └── report.md             # Full methodology & analysis report
 ├── .gitignore
 └── README.md
-
-
+```
 ==> How to Run
 
 1. Clone the repo:
-   
+   ```
    git clone https://github.com/<your-username>/character-recognition-nn.git
    cd character-recognition-nn
+   ```
    
 2. Set up environment:
-
+```
    python -m venv venv
    venv\Scripts\activate      # Windows
    source venv/bin/activate   # Mac/Linux
    pip install jupyter numpy matplotlib seaborn pillow scikit-learn
-  
+  ```
 3. Launch Jupyter and open `Assigment.ipynb`:
-   
+   ```
    jupyter notebook
-   
+   ```
 4. Run all cells sequentially (Kernel → Restart Kernel and Run All Cells).
 
 ==> Key Results
