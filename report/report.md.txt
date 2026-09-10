@@ -1,0 +1,97 @@
+Character Recognition Neural Network. From Scratch (NumPy)
+
+	A feedforward neural network built entirely from scratch with NumPy without using TensorFlow, PyTorch or Keras is used to classify thirty‑five character classes: the letters A through Z and the digits one through nine. The Character Recognition Neural Network relies on a yet effective architecture and training routine.
+
+Overview
+
+- Dataset: Two thousand one hundred synthetic images of characters with sixty images for each of the thirty‑five classes. The images were created using fonts and then rotated or noised randomly to add variety.
+
+- **Architecture**: The Character Recognition Neural Network takes 784 inputs feeds them into a hidden layer of 128 neurons with ReLU activation into a second hidden layer of 64 neurons with ReLU and finally outputs 35 probabilities with a Softmax layer.
+
+- **Training**: Mini‑batch gradient descent is employed, with cross‑entropy loss. Backpropagation was derived manually. Applied to update the weights.
+
+- **Results**: The Character Recognition Neural Network achieved one hundred percent accuracy on the test set and seventy percent accuracy on a deliberately harder stress‑test set that includes heavy rotation and noise. The full analysis can be found in `report/report.md`.
+
+## Repository Structure
+
+```
+
+character-recognition-nn/
+
+├── Assigment.ipynb # Full notebook: data generation, network, training, analysis
+
+├── data/
+
+│ └── character_dataset.npz
+
+├── images/
+S
+│ ├── training_curves.png
+
+│ ├── confusion_matrix.png
+
+│ └── hard_misclassified_examples.png
+
+├── report/
+
+│ └── report.md # methodology & analysis report
+
+├──.gitignore
+
+└── README.md
+
+```
+
+## How to Run
+
+1. Clone the repository:
+
+```bash
+
+git clone https://github.com/<your-username>/character-recognition-nn.git
+
+cd character-recognition-nn
+
+```
+
+2. Set up the environment:
+
+```bash
+
+python -m venv venv
+
+venv\Scripts\activate # Windows
+
+source venv/bin/activate # Mac/Linux
+
+pip install jupyter numpy matplotlib seaborn pillow scikit-learn
+
+```
+
+3. Launch. Open `Assigment.ipynb`:
+
+```bash
+
+jupyter notebook
+
+```
+
+4. Run all cells in order by selecting Kernel → Restart Kernel and Run All Cells.
+
+## Key Results
+
+| Metric | Value |
+
+|---|---|
+
+| Test Accuracy | 100.0% |
+
+| Test Loss | 0.0027
+
+| Stress-test Accuracy (heavy rotation/noise) | 70.0% |
+
+More details are available, in `report/report.md` where the methodology, architecture choices and misclassification analysis are discussed in depth.
+
+## Author
+
+Yaswanth Raj R. B.Tech AI & Data Science, Chennai Institute of Technology
