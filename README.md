@@ -5,9 +5,9 @@ A feedforward neural network implemented entirely from scratch using NumPy (no T
 ==> Overview
 
 - Dataset : 2,100 synthetically generated character images (60 samples/class), created with multiple fonts + random rotation/noise augmentation
-- Architecture : 784 → 128 (ReLU) → 64 (ReLU) → 35 (Softmax)
+- Architecture : Architecture : 784 → 48 (ReLU) → 35 (Softmax)
 - Training : mini-batch gradient descent, cross-entropy loss, manually derived backpropagation
-- Results : 100% test accuracy on in-distribution data; 70% accuracy on a deliberately harder stress-test set (see `report/report.md` for full analysis)
+- Results : Results : 90.16% test accuracy on standard data; 80.00% accuracy on a deliberately harder stress-test set (see `report/report.md` for full analysis)
 
 ==> Repository Structure
 
@@ -51,9 +51,9 @@ character-recognition-nn/
                             +======================================================+
                             |                    Metric                   |  Value |
                             |---------------------------------------------|------- |
-                            | Test Accuracy                               | 100.0% |
-                            | Test Loss                                   | 0.0027 |
-                            | Stress-test Accuracy (heavy rotation/noise) | 70.0%  |
+                            | Test Accuracy                               | 90.16% |
+                            | Test Loss                                   | 0.3532 |
+                            | Stress-test Accuracy (heavy rotation/noise) | 80.0%  |
                             +======================================================+
 
 See `report/report.md` for the full methodology, architecture reasoning, and misclassification analysis.
