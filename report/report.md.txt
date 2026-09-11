@@ -25,7 +25,7 @@ Finally, the dataset was split into a 70/15/15 ratio of train/validation/test us
 A fully-connected feedforward neural network was implemented with the following structure:
 
 
-        ===> Input (784) -> Hidden Layer 1 (128, ReLU) -> Hidden Layer 2 (64, ReLU) -> Output (35, Softmax) <===
+        ===> Input (784) -> Hidden Layer 1 (48, ReLU) -> Output (35, Softmax) <===
 
 
 Weights were initialized using He initialization (normal distribution with mean 0 and std 2/fan_in) which preserves variance as data passes through ReLU layers.
@@ -46,44 +46,45 @@ Gradient descent was performed using backpropagation through all layers of the n
 
 The training process was run for 100 epochs with a batch size of 32 and a learning rate of 0.1. Vanilla mini-batch gradient descent was used as opposed to more advanced optimizers like Adam, as they would not have been implemented from scratch.
 
+Add L2 Regularization details: State that weight decay was applied with lambda = 0.015 (l2_lambda = 0.015), and update standard dataset noise parameters to sigma in [0.20, 0.35].
+
 During training, both the train and validation losses/accuracies were plotted to observe convergence. As expected, the loss decreased smoothly with no nan values during training, and both the training and validation accuracies eventually converged to 100%:
 
 												+===================================+
 												|       Metric        | Final Value |
 												|---------------------|-------------|
 												| Train Accuracy      | 100.0%      |
-												| Validation Accuracy | 99.68%      |
-												| Train Loss          | 0.0016      |
-												| Validation Loss     | 0.0082      |
+												| Validation Accuracy | 88.25%      |
+												| Train Loss          | 0.0157      |
+												| Validation Loss     | 0.3940      |
 												+===================================+
 
 See `images/training_curves.png` for the training progress.
 
-The slight gap between the train (100%) and validation (99.68%) accuracy likely represents mild overfitting, and is due to the limited font variation (4 fonts) and augmentation (+-15 degrees rotation in training data) during dataset generation.
+The slight gap between the train (100%) and validation (88.25%) accuracy likely represents mild overfitting, and is due to the limited font variation (4 fonts) and augmentation (+-15 degrees rotation in training data) during dataset generation.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 ==> 4. Evaluation on Test Set
 
-The model achieved 100% accuracy on the test set, with a loss of 0.0027. A confusion matrix was generated (see `images/confusion_matrix.png`) for the standard test set, confirming that no characters were misclassified on the standard test set (as expected, as the test set was generated using the same augmentation as the training set).
+The model achieved 90.16% accuracy on the test set, with a loss of 0.3532. A confusion matrix was generated (see `images/confusion_matrix.png`) for the standard test set, confirming that no characters were misclassified on the standard test set (as expected, as the test set was generated using the same augmentation as the training set).
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ==> 5. Misclassification Analysis (Stress Test)
 
-To evaluate whether the model actually learns to classify characters in a meaningful way, a second, much more aggressive stress test set was generated using rotation angles of +-35 degrees and noise of 0.10-0.25. Using this stress test set, the model correctly classified only 70% of characters, resulting in 105 misclassified out of 350 total. The sudden drop in performance from 100% (standard test) to 70% (stress test) demonstrates that the model generalizes poorly to inputs that are significantly different from what it was trained on.
-For individual misclassification analysis, let us analyze the table below of the top 8 most common misclassifications (excluding the rows where the predicted class was the same as the true class):
+To evaluate whether the model actually learns to classify characters in a meaningful way, a second, much more aggressive stress test set was generated using rotation angles of +-35 degrees and noise of 0.10-0.25. Using this stress test set, the model correctly classified only 80% of characters, resulting in 70 misclassified out of 350 total.The drop in performance from 90.16% (standard test) to 80.00% (stress test) demonstrates that the model experiences moderate performance degradation when evaluated on inputs with higher rotation and noise levels beyond its training distribution.For individual misclassification analysis, let us analyze the table below of the top 8 most common misclassifications (excluding the rows where the predicted class was the same as the true class):
 
 +---------------------------------------------------------------+
 | # | True | Predicted | Confidence (Wrong) | Confidence (True) |
 |---|------|-----------|--------------------|-------------------|
-| 1 |   A  |     4     |      96.06%        |       1.46%       |
-| 2 |   A  |     V     |      65.01%        |       16.76%      |
-| 3 |   A  |     4     |      87.82%        |       11.60%      |
-| 4 |   A  |     4     |      93.64%        |       4.97%       |
-| 5 |   A  |     V     |      84.47%        |       2.01%       |
-| 6 |   A  |     4     |      86.82%        |       0.39%       |
-| 7 |   A  |     6     |      49.29%        |       4.18%       |
-| 8 |   B  |     S     |      81.89%        |       0.00%       |
+| 1 |   I  |     Z     |      98.67%        |       0%          |
+| 2 |   B  |     6     |      97.46%        |       0%          |
+| 3 |   C  |     G     |      98.71%        |       0%          |
+| 4 |   E  |     S     |      99.98%        |       0%          |
+| 5 |   H  |     S     |      99.04%        |       0%          |
+| 6 |   N  |     8     |      84.81%        |       1.09%       |
+| 7 |   R  |     8     |      83.39%        |       0%          |
+| 8 |   I  |     Z     |      72.84%        |       1.15%       |
 +---------------------------------------------------------------+
 
 Analysis of specific misclassifications:
